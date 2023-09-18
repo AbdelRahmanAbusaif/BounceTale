@@ -8,7 +8,9 @@ public class MainMenu : MonoBehaviour
     public void MainMenuStart()
     {
         SceneManager.LoadScene("MainMenu");
-        FindAnyObjectByType<PausManu>().GetComponent<PausManu>().ResumeGame();
+        FindAnyObjectByType<PausManu>()
+            .GetComponent<PausManu>()
+            .ResumeGame();
     }
     public void PlayGame()
     {
@@ -16,7 +18,7 @@ public class MainMenu : MonoBehaviour
     }
     public void QuitGame()
     {
-        print("Quitting"); //Quitting
+        print("Quitting");
         Application.Quit();
     }
 }

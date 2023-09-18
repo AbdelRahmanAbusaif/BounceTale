@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]public AudioClip FruitClip;
     [SerializeField]public AudioClip JumpPadsClip;
     [SerializeField]public AudioClip PowerUpClip;
-    //Shotgun and Bomb sound soon
+
     void Start()
     {
         musicSource.clip = musicClip;

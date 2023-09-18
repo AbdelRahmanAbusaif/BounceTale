@@ -4,17 +4,18 @@ using UnityEngine.UI;
 
 public class FruitCount : MonoBehaviour
 {
-    TextMeshProUGUI ScoreText;
+    private TextMeshProUGUI scoreText;
     public static int Score;
+
     // Start is called before the first frame update
     void Start()
     {
-        Score= 0 ;
-        ScoreText = GetComponent <TextMeshProUGUI>();
+        Score = 0;
+        scoreText = GetComponent<TextMeshProUGUI>();
     }
     // Update is called once per frame
     void Update()
     {
-        ScoreText.text= Score.ToString();
+        scoreText.text = Score.ToString();
     }
 }

@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PausManu : MonoBehaviour
-{   
-    public static bool GameIsPaused=false;
+{
+    public static bool GameIsPaused = false;
     public GameObject pauseMenuUi;
     public GameObject PlayerMovement;
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(GameIsPaused)
-                ResumeGame();
-            else 
-                PauseGame();
-        }
+        if (!Input.GetKeyDown(KeyCode.Escape))
+            return;
+
+        if (GameIsPaused)
+            ResumeGame();
+        else
+            PauseGame();
+
     }
     public void ResumeGame()
-    {  
+    {
         pauseMenuUi.SetActive(false);
         Time.timeScale = 1;
         GameIsPaused = false;

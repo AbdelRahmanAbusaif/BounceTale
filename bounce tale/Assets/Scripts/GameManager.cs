@@ -6,83 +6,82 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Deth;
-    public GameObject []Fruit;
-    public GameObject []Door;
+    public GameObject[] Fruit;
+    public GameObject[] Door;
+    public Animator AnimCheck;
     //dont forget to set the start Position 
-    Vector2 Startpos;
-    Vector2 Pos2;
-    Vector2 []posDoor;
+    private Vector2 startpos;
+    private Vector2 pos2;
+    private Vector2[] posDoor;
 
-    public Animator animCheck;
     void Start()
     {
-        Startpos=Player.transform.position;
-        Pos2 = Startpos;
+        startpos = Player.transform.position;
+        pos2 = startpos;
         for (int i = 0; i < Door.Length; i++)
         {
-             posDoor[i]=Door[i].transform.position;
+            posDoor[i] = Door[i].transform.position;
         }
-           
+
     }
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
             Restart();
     }
     public void UpdateCheckPoint(Vector2 pos)
-    {   
-        if(Health.health > 0)
+    {
+        if (Health.HealthCount > 0)
         {
-            Startpos=pos;
-            animCheck.SetBool("Active", true);
-            //restore health
+            startpos = pos;
+            AnimCheck.SetBool("Active", true);
+            //restore HealthCount
         }
     }
     public void Die()
     {
-        Instantiate(Deth,Player.transform.position,Quaternion.identity);
+        Instantiate(Deth, Player.transform.position, Quaternion.identity);
 
         Player.SetActive(false);
-        
-        Invoke("respawn",1f);
-             
+
+        Invoke("respawn", 1f);
+
     }
 
     void respawn()
     {
-        
         //game over
-        if(Health.health<=0)
+        if (Health.HealthCount <= 0)
         {
-            Player.transform.position = Pos2;
+            Player.transform.position = pos2;
             Player.SetActive(true);
-            Health.health = 3;
-            Startpos=Pos2;
-            animCheck.SetBool("Active", false);
-            FruitCount.Score=0;
+            Health.HealthCount = 3;
+            startpos = pos2;
+            AnimCheck.SetBool("Active", false);
+            FruitCount.Score = 0;
+
             //active 
-            for(int i=0;i<Fruit.Length;i++) 
+            for (int i = 0; i < Fruit.Length; i++)
+            {
                 Fruit[i].SetActive(true);
+            }
+
             for (int i = 0; i < Door.Length; i++)
             {
-                Door[i].transform.position=posDoor[i];
+                Door[i].transform.position = posDoor[i];
             }
-               
+
         }
         else
         {
-            Player.transform.position = Startpos;
-            
+            Player.transform.position = startpos;
             Player.SetActive(true);
-        } 
-        
+        }
+
     }
-    public void PalyerWin()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-    }
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }  
+
+    public void PalyerWin() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    
 }

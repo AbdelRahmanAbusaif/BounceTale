@@ -5,35 +5,41 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 public class OptionMenu : MonoBehaviour
 {
-    public Slider VoulumeSlider;  
+    public Slider VoulumeSlider;
     public Slider MusicSlider;
-    public AudioMixer myaudiomixer;
+
+    [SerializeField]
+    AudioMixer myAudiomixer;
+
     void start()
     {
-        if(PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey("musicVolume"))
         {
             Load();
         }
-        else 
-           SetMusicVolume();
-
+        else
+        {
+            SetMusicVolume();
+        }
     }
-     
+
     void Load()
     {
-        MusicSlider.value=PlayerPrefs.GetFloat("music");
-        MusicSlider.value=PlayerPrefs.GetFloat("volume");
+        MusicSlider.value = PlayerPrefs.GetFloat("music");
+        MusicSlider.value = PlayerPrefs.GetFloat("volume");
     }
+
     public void SetMusicVolume()
     {
-        float volume = MusicSlider.value;
-        myaudiomixer.SetFloat("music", Mathf.Log10(volume)*20);
-        PlayerPrefs.SetFloat("music",volume);
+        float musicVolume = MusicSlider.value;
+        myAudiomixer.SetFloat("music", Mathf.Log10(musicVolume) * 20);
+        PlayerPrefs.SetFloat("music", musicVolume);
     }
+
     public void SetVolumeVolume()
     {
-        float volume = VoulumeSlider.value;
-        myaudiomixer.SetFloat("volume", Mathf.Log10(volume)*20);
-        PlayerPrefs.SetFloat("volume",volume);
+        float sliderVolume = VoulumeSlider.value;
+        myAudiomixer.SetFloat("volume", Mathf.Log10(sliderVolume) * 20);
+        PlayerPrefs.SetFloat("volume", sliderVolume);
     }
 }
